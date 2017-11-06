@@ -1,5 +1,6 @@
 package com.digitalroute.record.cdr;
 
+import com.digitalroute.record.common.Field;
 import com.digitalroute.record.common.Record;
 
 public class CdrRecord extends Record {
@@ -22,5 +23,10 @@ public class CdrRecord extends Record {
 
     public boolean endCall() {
         return super.get(4) == Byte.valueOf(END_CALL);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

@@ -15,19 +15,21 @@ public abstract class TextRecordSchema extends RecordSchema {
         this.numOfFields = fields.length;
     }
 
-    public String getDelimiter() {
+    public abstract Record onRead(String line);
+
+    protected String getDelimiter() {
         return delimiter;
     }
 
-    public String getNewLine() {
+    protected String getNewLine() {
         return newLine;
     }
 
-    public boolean hasHeader() {
+    protected boolean hasHeader() {
         return hasHeader;
     }
 
-    public int getNumOfFields() {
+    protected int getNumOfFields() {
         return numOfFields;
     }
 }

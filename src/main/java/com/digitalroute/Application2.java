@@ -1,0 +1,40 @@
+// Copyright 2000-2017 Digital Route AB. All rights reserved.
+// DIGITAL ROUTE AB PROPRIETARY/CONFIDENTIAL.
+// Use is subject to license terms.
+//
+
+package com.digitalroute;
+
+import com.digitalroute.input.CallRecordsProcessor;
+import com.digitalroute.output.BillingGateway;
+
+public class Application2 {
+
+    public static final String IN_FILE = "INFILE_ascii_big";
+
+    public static void main(String[] args) throws Exception {
+        //Create an CallRecordsProcessor an feed it with an anonymous class, to debug its activity
+        CallRecordsProcessor processor = new MyTextInputCallRecordsProcessor(new BillingGateway() {
+            @Override
+            public void beginBatch() {
+            }
+
+            @Override
+            public void consume(String callId, int seqNum, String aNum, String bNum, byte causeForOutput, int duration) {
+                System.out.println("consume: " + callId + ", " + seqNum + ", " + aNum + ", " + bNum + ", " + causeForOutput + ", " + duration);
+            }
+
+            @Override
+            public void endBatch(long totalDuration) {
+                System.out.println("endBatch: totalDuration " + totalDuration);
+            }
+
+            @Override
+            public void logError(ErrorCause errorCause, String callId, int seqNum, String aNum, String bNum) {
+                System.out.println("logError " + errorCause + ", " + callId + ", " + seqNum + ", " + aNum + ", " + bNum);
+            }
+        });
+        processor.processBatch(Application2.class.getClassLoader().getResourceAsStream(IN_FILE));
+    }
+
+}

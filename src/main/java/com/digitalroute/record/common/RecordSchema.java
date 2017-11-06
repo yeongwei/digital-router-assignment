@@ -14,4 +14,16 @@ public abstract class RecordSchema {
     public int getFieldLength() {
         return fields.length;
     }
+
+    public Field[] fields() {
+        return fields;
+    }
+
+    public int getIndexOf(String name) {
+        for (int i = 0; i < getFieldLength(); i ++) {
+            if (getField(i).getName().equals(name))
+                return i;
+        }
+        return - 1;
+    }
 }
