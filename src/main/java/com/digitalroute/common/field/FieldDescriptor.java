@@ -1,11 +1,11 @@
-package com.digitalroute.record.common;
+package com.digitalroute.common.field;
 
-public class Field {
+public class FieldDescriptor {
 
     private String name;
     private FieldType typeCode;
 
-    public Field(String name, FieldType typeCode) {
+    public FieldDescriptor(String name, FieldType typeCode) {
         this.name = name;
         this.typeCode = typeCode;
     }
@@ -20,6 +20,6 @@ public class Field {
 
     @Override
     public String toString() {
-        return "Field(name: " + name + ", typeCode: " + typeCode.name() + " (" + typeCode.ordinal() + "))";
+        return "FieldDescriptor(name: " + name + ", typeCode: " + typeCode.name() + " (" + typeCode.ordinal() + "))";
     }
 }

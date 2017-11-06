@@ -1,13 +1,16 @@
 package com.digitalroute.record.common;
 
+import com.digitalroute.common.field.FieldDescriptor;
+import com.digitalroute.common.field.FieldType;
+import com.digitalroute.common.field.FieldValue;
 import org.junit.*;
 
 import static org.junit.Assert.assertTrue;
 
-public class FieldTestSpec {
+public class FieldDescriptorTestSpec {
     @Test
     public void testString() {
-        Field f = new Field("name", FieldType.STRING);
+        FieldDescriptor f = new FieldDescriptor("name", FieldType.STRING);
         assertTrue(f.getName() == "name");
 
         FieldValue fv = new FieldValue(f, "digitalrouter");
@@ -17,7 +20,7 @@ public class FieldTestSpec {
 
     @Test
     public void testInt() {
-        Field f = new Field("counter", FieldType.INT);
+        FieldDescriptor f = new FieldDescriptor("counter", FieldType.INT);
         FieldValue fv = new FieldValue(f, 100);
         assertTrue(fv.get() == Integer.valueOf(100));
         assertTrue(fv.get().equals(100));
@@ -25,7 +28,7 @@ public class FieldTestSpec {
 
     @Test
     public void testByte() {
-        Field f = new Field("counter", FieldType.BYTE);
+        FieldDescriptor f = new FieldDescriptor("counter", FieldType.BYTE);
         FieldValue fv = new FieldValue(f, (byte) 127);
         assertTrue(fv.get() == Byte.valueOf("127"));
         assertTrue(fv.get().equals((byte) 127));
@@ -33,7 +36,7 @@ public class FieldTestSpec {
 
     @Test
     public void testLong() {
-        Field f = new Field("counter", FieldType.LONG);
+        FieldDescriptor f = new FieldDescriptor("counter", FieldType.LONG);
         FieldValue fv = new FieldValue(f, 127L);
         assertTrue(fv.get() == Long.valueOf("127"));
         assertTrue(fv.get().equals((long) 127));

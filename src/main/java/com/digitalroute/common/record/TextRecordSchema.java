@@ -1,27 +1,32 @@
-package com.digitalroute.record.common;
+package com.digitalroute.common.record;
 
+import com.digitalroute.common.field.FieldDescriptor;
+
+/**
+ * Schema to describe input text record
+ */
 public abstract class TextRecordSchema extends RecordSchema {
     private String delimiter;
     private String newLine;
     private boolean hasHeader;
     private int numOfFields;
 
-    public TextRecordSchema(String delimiter, String newLine, boolean hasHeader, Field[] fields) {
-        super(fields);
+    public TextRecordSchema(String delimiter, String newLine, boolean hasHeader, FieldDescriptor[] fieldDescriptors) {
+        super(fieldDescriptors);
 
         this.delimiter = delimiter;
         this.newLine = newLine;
         this.hasHeader = hasHeader;
-        this.numOfFields = fields.length;
+        this.numOfFields = fieldDescriptors.length;
     }
 
     public abstract Record onRead(String line);
 
-    protected String getDelimiter() {
+    protected String delimiter() {
         return delimiter;
     }
 
-    protected String getNewLine() {
+    protected String newLine() {
         return newLine;
     }
 
@@ -29,7 +34,7 @@ public abstract class TextRecordSchema extends RecordSchema {
         return hasHeader;
     }
 
-    protected int getNumOfFields() {
+    protected int numOfFields() {
         return numOfFields;
     }
 }

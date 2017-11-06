@@ -1,28 +1,28 @@
 package com.digitalroute.record.cdr;
 
-import com.digitalroute.record.common.Field;
+import com.digitalroute.common.field.FieldDescriptor;
 
-import static com.digitalroute.record.common.FieldType.*;
+import static com.digitalroute.common.field.FieldType.*;
 
-import com.digitalroute.record.common.Record;
-import com.digitalroute.record.common.TextRecordSchema;
+import com.digitalroute.common.record.Record;
+import com.digitalroute.common.record.TextRecordSchema;
 
 final public class CdrRecordSchema extends TextRecordSchema {
     public CdrRecordSchema() {
-        super(":|,", "\n", false, new Field[]{
-                new Field("callId", STRING),
-                new Field("seqNum", INT),
-                new Field("aNum", STRING),
-                new Field("bNum", STRING),
-                new Field("causeForOutput", BYTE),
-                new Field("duration", INT),
+        super(":|,", "\n", false, new FieldDescriptor[]{
+                new FieldDescriptor("callId", STRING),
+                new FieldDescriptor("seqNum", INT),
+                new FieldDescriptor("aNum", STRING),
+                new FieldDescriptor("bNum", STRING),
+                new FieldDescriptor("causeForOutput", BYTE),
+                new FieldDescriptor("duration", INT),
         });
     }
 
     @Override
     public Record onRead(String line) {
-        String[] values = line.split(super.getDelimiter());
-        if (values.length == super.getFieldLength()) {
+        String[] values = line.split(super.delimiter());
+        if (values.length == super.fieldDescriptorsLength()) {
             CdrRecord cdr = new CdrRecord();
             for (int i = 0; i < values.length; i ++)
                 cdr.set(i, values[i]);

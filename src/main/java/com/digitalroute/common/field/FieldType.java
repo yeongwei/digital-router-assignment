@@ -1,4 +1,4 @@
-package com.digitalroute.record.common;
+package com.digitalroute.common.field;
 
 public enum FieldType {
     STRING, INT, BYTE, BOOLEAN, LONG

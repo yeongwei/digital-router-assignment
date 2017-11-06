@@ -1,9 +1,10 @@
-package com.digitalroute.input;
+package com.digitalroute.processor;
 
 import com.digitalroute.Application;
-import com.digitalroute.input.common.TextInputSchema;
+import com.digitalroute.input.CallRecordsProcessor;
+import com.digitalroute.input.schema.TextInputSchema;
 import com.digitalroute.output.BillingGateway;
-import com.digitalroute.record.common.Record;
+import com.digitalroute.common.record.Record;
 
 import java.io.InputStream;
 

@@ -1,21 +1,21 @@
-package com.digitalroute.record.common;
+package com.digitalroute.common.field;
 
 public class FieldValue {
-    private Field field;
+    private FieldDescriptor fieldDescriptor;
     private Object value;
 
-    public FieldValue(Field field, Object value) {
-        this.field = field;
+    public FieldValue(FieldDescriptor fieldDescriptor, Object value) {
+        this.fieldDescriptor = fieldDescriptor;
         this.value = set(value);
     }
 
-    public Field getField() {
-        return field;
+    public FieldDescriptor getFieldDescriptor() {
+        return fieldDescriptor;
     }
 
     // TODO: In reality there should be some Boxed Types to handle this mess
     private Object set(Object value) {
-        switch (field.getTypeCode()) {
+        switch (fieldDescriptor.getTypeCode()) {
             case STRING:
                 return String.valueOf(value);
             case INT:
@@ -37,11 +37,9 @@ public class FieldValue {
         }
     }
 
-    /*
-        Setter should have handled the type accordingly
-     */
+    // TODO: Although setter might have done the dirty job but do checking as well
     public Object get() {
-        switch (field.getTypeCode()) {
+        switch (fieldDescriptor.getTypeCode()) {
             case STRING:
                 return String.valueOf(value);
             case INT:

@@ -1,4 +1,6 @@
-package com.digitalroute.record.common;
+package com.digitalroute.common.record;
+
+import com.digitalroute.common.field.FieldValue;
 
 public abstract class Record {
     private RecordSchema recordSchema;
@@ -6,7 +8,7 @@ public abstract class Record {
 
     public Record(RecordSchema recordSchema) {
         this.recordSchema = recordSchema;
-        this.fieldValues = new FieldValue[recordSchema.getFieldLength()];
+        this.fieldValues = new FieldValue[recordSchema.fieldDescriptorsLength()];
     }
 
     public RecordSchema recordSchema() {
@@ -14,16 +16,26 @@ public abstract class Record {
     }
 
     /**
-     * I
-     *
+     * Set record value with index
      * @param index starts from 0
      * @param value
      */
     public void set(int index, Object value) {
-        fieldValues[index] = new FieldValue(recordSchema.getField(index), value);
+        fieldValues[index] = new FieldValue(recordSchema.fieldDescriptor(index), value);
     }
 
     /**
+     * Set record value with name
+     * @param name
+     * @param value
+     */
+    public void set(String name, Object value) {
+        int index = recordSchema.indexOf(name);
+        set(index, value);
+    }
+
+    /**
+     * Get record value with index
      * @param index starts from 0
      * @return
      */
@@ -31,15 +43,20 @@ public abstract class Record {
         return fieldValues[index].get();
     }
 
+    /**
+     * Get record value with name
+     * @param name
+     * @return
+     */
     public Object get(String name) {
-        return fieldValues[recordSchema.getIndexOf(name)].get();
+        return get(recordSchema.indexOf(name));
     }
 
     @Override
     public String toString() {
         StringBuffer recordString = new StringBuffer(getClass().getSimpleName() + "(");
-        for (int i = 0; i < recordSchema().getFieldLength(); i++)
-            if (i + 1 == recordSchema().getFieldLength())
+        for (int i = 0; i < recordSchema().fieldDescriptorsLength(); i++)
+            if (i + 1 == recordSchema().fieldDescriptorsLength())
                 recordString.append(get(i).toString());
             else
                 recordString.append(get(i).toString() + ", ");

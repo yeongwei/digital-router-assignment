@@ -1,7 +1,6 @@
 package com.digitalroute.record.cdr;
 
-import com.digitalroute.record.common.Field;
-import com.digitalroute.record.common.Record;
+import com.digitalroute.common.record.Record;
 
 public class CdrRecord extends Record {
     private final static String INCOMPLETE_RECORD_CALL_ID = "_";
@@ -23,10 +22,5 @@ public class CdrRecord extends Record {
 
     public boolean endCall() {
         return super.get(4) == Byte.valueOf(END_CALL);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

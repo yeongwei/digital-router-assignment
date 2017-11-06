@@ -1,7 +1,7 @@
-package com.digitalroute.input.common;
+package com.digitalroute.input.schema;
 
-import com.digitalroute.record.common.Record;
-import com.digitalroute.record.common.TextRecordSchema;
+import com.digitalroute.common.record.Record;
+import com.digitalroute.common.record.TextRecordSchema;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
