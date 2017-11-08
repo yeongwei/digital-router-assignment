@@ -40,8 +40,31 @@ public class FieldValue {
     }
 
     // TODO: Although setter might have done the dirty job but do checking as well ???
-    public Object get() {
-        return value;
+    public Object value() { return value; }
+
+    // TODO: Although castings are all consolidate here, need revision
+    public String valueString() { return (String) value; }
+
+    public int valueInt() { return (int) value; }
+
+    public byte valueByte() { return (byte) value; }
+
+    public long valueLong() { return (long) value; }
+
+    public boolean larger(Object that) {
+        switch (fieldDescriptor.typeCode()) {
+            case INT: return valueInt() > (int) that;
+            case LONG: return valueLong() > (long) that;
+            default: return false;
+        }
+    }
+
+    public Object add(Object that) {
+        switch (fieldDescriptor.typeCode()) {
+            case INT: return valueInt() + (int) that;
+            case LONG: return valueLong() + (long) that;
+            default: return false;
+        }
     }
 
     @Override

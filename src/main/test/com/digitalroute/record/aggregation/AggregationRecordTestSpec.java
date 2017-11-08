@@ -28,6 +28,7 @@ public class AggregationRecordTestSpec {
         cdrRec.set(5, 10);
         aggRec.put(cdrRec);
 
+        System.out.println(aggRec.toString());
         assertTrue(aggRec.toString().equals("AggregationRecord(seqNum: 20, duration: 20)"));
     }
 }

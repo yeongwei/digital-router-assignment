@@ -20,15 +20,23 @@ public class AggregationRecord {
             final FieldDescriptor fd = aggregationFormulas[i].fieldDescriptor();
             switch (aggregationFormulas[i].aggregationType()) {
                 case MAX:
-                    if (larger(record.get(fd.name()).get(), state[i], fd.typeCode()))
-                        state[i] = record.get(fd.name()).get();
+                    if (record.get(fd.name()).larger(state[i]))
+                        state[i] = record.get(fd.name()).value();
                 break;
                 case SUM:
-                    state[i] = sum(record.get(fd.name()).get(), state[i], fd.typeCode());
+                    state[i] = record.get(fd.name()).add(state[i]);
                 break;
             }
         }
         return true;
+    }
+
+    public Object valueOf(String name) {
+        for (int i = 0; i < aggregationFormulas.length; i++) {
+            if (aggregationFormulas[i].fieldDescriptor().name().equals(name))
+                return state[i];
+        }
+        return null;
     }
 
     @Override
@@ -36,38 +44,16 @@ public class AggregationRecord {
         StringBuffer aggRecStr = new StringBuffer("AggregationRecord(");
         for (int i = 0; i < aggregationFormulas.length; i++) {
             aggRecStr.append(aggregationFormulas[i].fieldDescriptor().name() + ": " + state[i]);
-            if (i + 1 == aggregationFormulas.length)
-                aggRecStr.append(")");
-            else
-                aggRecStr.append(", ");
+            if (i + 1 == aggregationFormulas.length) aggRecStr.append(")");
+            else aggRecStr.append(", ");
         }
         return aggRecStr.toString();
     }
 
-    // TODO: This needs to go somewhere
     private Object initialize(FieldType typeCode) {
         switch (typeCode) {
-            case INT:
-                return new Integer(0);
-            case LONG:
-                return new Long(0);
-            default:
-                return 0;
-        }
-    }
-
-    private boolean larger(Object obj1, Object obj2, FieldType typeCode) {
-        switch (typeCode) {
-            case INT: return (int) obj1 > (int) obj2;
-            case LONG: return (long) obj1 > (long) obj2;
-            default: return false;
-        }
-    }
-
-    private Object sum(Object obj1, Object obj2, FieldType typeCode) {
-        switch (typeCode) {
-            case INT: return ((int) obj1 + (int) obj2);
-            case LONG: return ((long) obj1 + (long) obj2);
+            case INT: return new Integer(0);
+            case LONG: return new Long(0);
             default: return 0;
         }
     }

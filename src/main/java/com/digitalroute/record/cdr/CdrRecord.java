@@ -14,17 +14,17 @@ public class CdrRecord extends Record {
 
     // TODO: Use boxed type to return appropriate type to avoid casting
 
-    public String callId() { return (String) get("callId").get(); }
+    public String callId() { return get("callId").valueString(); }
 
-    public int seqNum() { return (int) get("seqNum").get(); }
+    public int seqNum() { return get("seqNum").valueInt(); }
 
-    public String aNum() { return (String) get("aNum").get(); }
+    public String aNum() { return (String) get("aNum").valueString(); }
 
-    public String bNum() { return (String) get("bNum").get(); }
+    public String bNum() { return (String) get("bNum").valueString(); }
 
-    public byte causeForOutput() { return (byte) get("causeForOutput").get(); }
+    public byte causeForOutput() { return get("causeForOutput").valueByte(); }
 
-    public int duration() { return (byte) get("duration").get(); }
+    public int duration() { return get("duration").valueInt(); }
 
     public boolean onGoingCall() { return this.causeForOutput() == ON_GOING_CALL; }
 
