@@ -13,7 +13,7 @@ public abstract class TextInputCallRecordsProcessor implements CallRecordsProces
     private BillingGateway billingGateway;
     private TextInputSchema textInputSchema;
 
-    public TextInputCallRecordsProcessor(BillingGateway billingGateway, TextInputSchema textInputSchema) {
+    protected TextInputCallRecordsProcessor(BillingGateway billingGateway, TextInputSchema textInputSchema) {
         this.billingGateway = billingGateway;
         this.textInputSchema = textInputSchema;
     }
@@ -38,8 +38,8 @@ public abstract class TextInputCallRecordsProcessor implements CallRecordsProces
         return billingGateway;
     }
 
-    public abstract void begin();
-    public abstract void process(Record record);
-    public abstract void postProcess();
-    public abstract void end();
+    protected abstract void begin();
+    protected abstract void process(Record record);
+    protected abstract void postProcess();
+    protected abstract void end();
 }

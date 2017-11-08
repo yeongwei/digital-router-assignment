@@ -5,13 +5,14 @@ import com.digitalroute.common.field.FieldType;
 import com.digitalroute.common.field.FieldValue;
 import org.junit.*;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class FieldDescriptorTestSpec {
     @Test
     public void testString() {
         FieldDescriptor f = new FieldDescriptor("name", FieldType.STRING);
-        assertTrue(f.getName() == "name");
+        assertTrue(f.name() == "name");
 
         FieldValue fv = new FieldValue(f, "digitalrouter");
         assertTrue(fv.get() == "digitalrouter");
@@ -47,5 +48,13 @@ public class FieldDescriptorTestSpec {
         FieldType ft = FieldType.STRING;
         assertTrue(ft.name() == "STRING");
         assertTrue(ft.ordinal() == 0);
+    }
+
+    @Test
+    public void testEquality() {
+        FieldDescriptor f1 = new FieldDescriptor("field1", FieldType.STRING);
+        FieldDescriptor f2 = new FieldDescriptor("field1", FieldType.STRING);
+        assertFalse(f1 == f2);
+        assertTrue(f1.equals(f2));
     }
 }

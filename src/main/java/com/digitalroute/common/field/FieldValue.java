@@ -1,5 +1,7 @@
 package com.digitalroute.common.field;
 
+import java.util.Objects;
+
 public class FieldValue {
     private FieldDescriptor fieldDescriptor;
     private Object value;
@@ -15,7 +17,7 @@ public class FieldValue {
 
     // TODO: In reality there should be some Boxed Types to handle this mess
     private Object set(Object value) {
-        switch (fieldDescriptor.getTypeCode()) {
+        switch (fieldDescriptor.typeCode()) {
             case STRING:
                 return String.valueOf(value);
             case INT:
@@ -37,21 +39,30 @@ public class FieldValue {
         }
     }
 
-    // TODO: Although setter might have done the dirty job but do checking as well
+    // TODO: Although setter might have done the dirty job but do checking as well ???
     public Object get() {
-        switch (fieldDescriptor.getTypeCode()) {
-            case STRING:
-                return String.valueOf(value);
-            case INT:
-                return (Integer) value;
-            case BYTE:
-                return (Byte) value;
-            case BOOLEAN:
-                return (Boolean) value;
-            case LONG:
-                return (Long) value;
-            default:
-                return value;
+        return value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fieldDescriptor, value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        try {
+            FieldValue fv = (FieldValue) obj;
+            return fieldDescriptor.equals(fv.fieldDescriptor) && value.equals(fv.value);
+        } catch (Exception e) {
+            return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer fieldValueStr = new StringBuffer()
+                .append(fieldDescriptor.name() + ": " + value);
+        return fieldValueStr.toString();
     }
 }

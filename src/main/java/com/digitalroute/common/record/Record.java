@@ -39,8 +39,8 @@ public abstract class Record {
      * @param index starts from 0
      * @return
      */
-    public Object get(int index) {
-        return fieldValues[index].get();
+    public FieldValue get(int index) {
+        return fieldValues[index];
     }
 
     /**
@@ -48,7 +48,7 @@ public abstract class Record {
      * @param name
      * @return
      */
-    public Object get(String name) {
+    public FieldValue get(String name) {
         return get(recordSchema.indexOf(name));
     }
 

@@ -12,15 +12,23 @@ public class CdrRecord extends Record {
         super(new CdrRecordSchema());
     }
 
-    public boolean onGoingCall() {
-        return super.get(4) == Byte.valueOf(ON_GOING_CALL);
-    }
+    // TODO: Use boxed type to return appropriate type to avoid casting
 
-    public boolean incompleteCall() {
-        return super.get(4) == Byte.valueOf(INCOMPLETE_CALL);
-    }
+    public String callId() { return (String) get("callId").get(); }
 
-    public boolean endCall() {
-        return super.get(4) == Byte.valueOf(END_CALL);
-    }
+    public int seqNum() { return (int) get("seqNum").get(); }
+
+    public String aNum() { return (String) get("aNum").get(); }
+
+    public String bNum() { return (String) get("bNum").get(); }
+
+    public byte causeForOutput() { return (byte) get("causeForOutput").get(); }
+
+    public int duration() { return (byte) get("duration").get(); }
+
+    public boolean onGoingCall() { return this.causeForOutput() == ON_GOING_CALL; }
+
+    public boolean incompleteCall() { return this.causeForOutput() == INCOMPLETE_CALL; }
+
+    public boolean endCall() { return this.causeForOutput() == END_CALL; }
 }

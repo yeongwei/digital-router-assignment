@@ -29,7 +29,7 @@ public abstract class RecordSchema {
      */
     public int indexOf(String name) {
         for (int i = 0; i < fieldDescriptorsLength(); i++) {
-            if (fieldDescriptor(i).getName().equals(name))
+            if (fieldDescriptor(i).name().equals(name))
                 return i;
         }
         return -1;

@@ -12,12 +12,12 @@ final public class MyTextInputCallRecordsProcessor extends TextInputCallRecordsP
     }
 
     @Override
-    public void begin() {
+    protected void begin() {
         billingGateway().beginBatch();
     }
 
     @Override
-    public void process(Record record) {
+    protected void process(Record record) {
         try {
             CdrRecord cdr = (CdrRecord) record;
             System.out.println(cdr.toString());
@@ -27,16 +27,14 @@ final public class MyTextInputCallRecordsProcessor extends TextInputCallRecordsP
     }
 
     @Override
-    public void postProcess() {
+    protected void postProcess() {
         System.out.println("postProcess");
     }
 
     @Override
-    public void end() {
-        billingGateway().endBatch(0l); // TODO: Implementation needed
-    }
+    protected void end() { billingGateway().endBatch(0l); } // TODO: Implementation needed
 
-    public void logError(BillingGateway.ErrorCause errorCause, CdrRecord record) {
-
+    protected void logError(BillingGateway.ErrorCause errorCause, CdrRecord record) {
+        billingGateway().logError(errorCause, record.callId(), record.seqNum(), record.aNum(), record.bNum());
     }
 }
