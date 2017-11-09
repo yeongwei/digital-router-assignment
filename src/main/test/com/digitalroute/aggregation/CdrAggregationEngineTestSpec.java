@@ -1,5 +1,6 @@
-package com.digitalroute.aggregation.cdr;
+package com.digitalroute.aggregation;
 
+import com.digitalroute.aggregation.cdr.CdrAggregationEngine;
 import com.digitalroute.common.record.aggregation.AggregationRecord;
 import com.digitalroute.record.cdr.CdrRecord;
 import org.junit.Test;
@@ -33,12 +34,12 @@ public class CdrAggregationEngineTestSpec {
 
         cdrAggregationEngine.put(cdrRec2);
 
-        AggregationRecord aggregationRecord1 = cdrAggregationEngine.getAndRemove(cdrRec1);
+        AggregationRecord aggregationRecord1 = cdrAggregationEngine.get(cdrRec1);
 
         System.out.println(aggregationRecord1.toString());
         assertTrue(aggregationRecord1.toString().equals("AggregationRecord(seqNum: 10, duration: 30)"));
 
-        AggregationRecord aggregationRecord2 = cdrAggregationEngine.getAndRemove(cdrRec2);
+        AggregationRecord aggregationRecord2 = cdrAggregationEngine.get(cdrRec2);
 
         System.out.println(aggregationRecord2.toString());
         assertTrue(aggregationRecord2.toString().equals("AggregationRecord(seqNum: 10, duration: 10)"));

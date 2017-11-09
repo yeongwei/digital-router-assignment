@@ -55,7 +55,7 @@ public class AggregationStash {
     }
 
     /**
-     * Compute the AggregationResult for a specific AggregationKey
+     * Compute the AggregationSummary for a specific AggregationKey
      * @param cdr
      * @return
      */

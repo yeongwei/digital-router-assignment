@@ -54,6 +54,7 @@ public class AggregationRecord {
         switch (typeCode) {
             case INT: return new Integer(0);
             case LONG: return new Long(0);
+            case BYTE: return (byte) 0;
             default: return 0;
         }
     }

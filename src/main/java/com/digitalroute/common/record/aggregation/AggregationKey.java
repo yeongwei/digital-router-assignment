@@ -1,14 +1,25 @@
 package com.digitalroute.common.record.aggregation;
 
+import com.digitalroute.common.field.FieldDescriptor;
 import com.digitalroute.common.field.FieldValue;
 
 import java.util.Objects;
 
 public class AggregationKey {
     private FieldValue[] fieldValues;
+    private FieldDescriptor[] fieldDescriptors;
 
-    public AggregationKey(FieldValue[] fieldValues) {
+    public AggregationKey(FieldDescriptor[] fieldDescriptors, FieldValue[] fieldValues) {
+        this.fieldDescriptors = fieldDescriptors;
         this.fieldValues = fieldValues;
+    }
+
+    public Object valueOf(String name) {
+        for (int i = 0; i < fieldDescriptors.length; i++) {
+            if (fieldDescriptors[i].name().equals(name))
+                return fieldValues[i].value();
+        }
+        return null;
     }
 
     @Override

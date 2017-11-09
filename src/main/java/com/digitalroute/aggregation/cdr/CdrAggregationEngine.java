@@ -37,6 +37,12 @@ final public class CdrAggregationEngine extends AggregationEngine {
         else return super.put(aggregationKey, cdrRecord);
     }
 
+    public boolean remove(CdrRecord cdrRecord) {
+        super.remove(cdrRecord);
+        keyLookup.remove(cdrShortKey(cdrRecord));
+        return true;
+    }
+
     /**
      * Track first occurence of AggregationKey
      * @param cdrShortKey

@@ -5,6 +5,7 @@ import com.digitalroute.common.record.aggregation.AggregationFormula;
 import com.digitalroute.common.record.aggregation.AggregationSpec;
 import com.digitalroute.common.record.aggregation.AggregationType;
 
+import static com.digitalroute.common.field.FieldType.BYTE;
 import static com.digitalroute.common.field.FieldType.INT;
 import static com.digitalroute.common.field.FieldType.STRING;
 
@@ -16,6 +17,7 @@ final public class CdrAggregationSpec extends AggregationSpec {
                 new FieldDescriptor("bNum", STRING)
         }, new AggregationFormula[] {
                 new AggregationFormula(new FieldDescriptor("seqNum", INT), AggregationType.MAX),
+                new AggregationFormula(new FieldDescriptor("causeForOutput", BYTE), AggregationType.MAX),
                 new AggregationFormula(new FieldDescriptor("duration", INT), AggregationType.SUM)
         });
     }

@@ -55,6 +55,7 @@ public class FieldValue {
         switch (fieldDescriptor.typeCode()) {
             case INT: return valueInt() > (int) that;
             case LONG: return valueLong() > (long) that;
+            case BYTE: return valueByte() > (byte) that;
             default: return false;
         }
     }
@@ -63,6 +64,7 @@ public class FieldValue {
         switch (fieldDescriptor.typeCode()) {
             case INT: return valueInt() + (int) that;
             case LONG: return valueLong() + (long) that;
+            case BYTE: return valueByte() + (byte) that;
             default: return false;
         }
     }
