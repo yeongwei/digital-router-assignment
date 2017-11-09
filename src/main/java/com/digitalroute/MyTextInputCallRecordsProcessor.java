@@ -41,8 +41,9 @@ final public class MyTextInputCallRecordsProcessor extends TextInputCallRecordsP
                 } else if (cdrRecord.endCall()) {
                     cdrAggregationEngine.put(cdrRecord);
                     AggregationRecord aggregationRecord = cdrAggregationEngine.get(cdrRecord);
-                    billingGateway().consume(cdrRecord.callId(), (int) aggregationRecord.valueOf("seqNum"), cdrRecord.aNum(), cdrRecord.bNum(),
-                            cdrRecord.causeForOutput(), (int) aggregationRecord.valueOf("duration"));
+                    billingGateway().consume(cdrRecord.callId(), aggregationRecord.valueOf("seqNum").valueInt(),
+                            cdrRecord.aNum(), cdrRecord.bNum(), aggregationRecord.valueOf("causeForOutput").valueByte(),
+                            aggregationRecord.valueOf("duration").valueInt());
                     cdrAggregationEngine.remove(cdrRecord);
                 } else if (cdrRecord.incompleteCall()) {
                     boolean result = cdrAggregationEngine.putExistFirst(cdrRecord);
@@ -67,9 +68,13 @@ final public class MyTextInputCallRecordsProcessor extends TextInputCallRecordsP
         HashMap<AggregationKey, AggregationRecord> aggregations = cdrAggregationEngine.all();
         for (AggregationKey aggregationKey : aggregations.keySet()) {
             AggregationRecord aggregationRecord = aggregations.get(aggregationKey);
-            billingGateway().consume((String) aggregationKey.valueOf("callId"), (int) aggregationRecord.valueOf("seqNum"),
-                    (String) aggregationKey.valueOf("aNum"), (String) aggregationKey.valueOf("bNum"),
-                    (byte) aggregationRecord.valueOf("causeForOutput"), (int) aggregationRecord.valueOf("duration"));
+            billingGateway().consume(
+                    aggregationKey.valueOf("callId").toString(),
+                    aggregationRecord.valueOf("seqNum").valueInt(),
+                    aggregationKey.valueOf("aNum").valueString(),
+                    aggregationKey.valueOf("bNum").valueString(),
+                    aggregationRecord.valueOf("causeForOutput").valueByte(),
+                    aggregationRecord.valueOf("duration").valueInt());
         }
     }
 

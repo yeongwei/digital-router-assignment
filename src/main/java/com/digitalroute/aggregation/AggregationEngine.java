@@ -79,9 +79,11 @@ public abstract class AggregationEngine {
         return aggregations;
     }
 
-    public AggregationSummary summary() {
-        return aggregationSummary;
-    }
+    /**
+     * Get AggregationSummary
+     * @return
+     */
+    public AggregationSummary summary() { return aggregationSummary; }
 
     /**
      * Make AggregationKey with Record
@@ -95,7 +97,9 @@ public abstract class AggregationEngine {
         return new AggregationKey(keys, keyValues);
     }
 
-    private void updateSummary(Record record) {
-        aggregationSummary.put(record);
-    }
+    /**
+     * Update each record into AggregationSummary
+     * @param record
+     */
+    private void updateSummary(Record record) { aggregationSummary.put(record); }
 }

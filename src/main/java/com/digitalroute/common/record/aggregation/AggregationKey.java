@@ -14,11 +14,10 @@ public class AggregationKey {
         this.fieldValues = fieldValues;
     }
 
-    public Object valueOf(String name) {
-        for (int i = 0; i < fieldDescriptors.length; i++) {
+    public FieldValue valueOf(String name) {
+        for (int i = 0; i < fieldDescriptors.length; i++)
             if (fieldDescriptors[i].name().equals(name))
-                return fieldValues[i].value();
-        }
+                return fieldValues[i];
         return null;
     }
 

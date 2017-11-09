@@ -33,6 +33,6 @@ public class AggregationEngineTestSpec {
 
         AggregationRecord aggregationRecord = engine.get(cdrRec);
         System.out.println(aggregationRecord.toString());
-        assertTrue(aggregationRecord.toString().equals("AggregationRecord(seqNum: 10, duration: 30)"));
+        assertTrue(aggregationRecord.toString().equals("AggregationRecord(seqNum: 10, causeForOutput: 2, duration: 30)"));
     }
 }

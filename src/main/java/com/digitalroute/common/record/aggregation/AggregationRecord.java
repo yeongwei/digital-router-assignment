@@ -2,6 +2,7 @@ package com.digitalroute.common.record.aggregation;
 
 import com.digitalroute.common.field.FieldDescriptor;
 import com.digitalroute.common.field.FieldType;
+import com.digitalroute.common.field.FieldValue;
 import com.digitalroute.common.record.Record;
 
 public class AggregationRecord {
@@ -31,11 +32,10 @@ public class AggregationRecord {
         return true;
     }
 
-    public Object valueOf(String name) {
-        for (int i = 0; i < aggregationFormulas.length; i++) {
+    public FieldValue valueOf(String name) {
+        for (int i = 0; i < aggregationFormulas.length; i++)
             if (aggregationFormulas[i].fieldDescriptor().name().equals(name))
-                return state[i];
-        }
+                return new FieldValue(aggregationFormulas[i].fieldDescriptor(), state[i]);
         return null;
     }
 

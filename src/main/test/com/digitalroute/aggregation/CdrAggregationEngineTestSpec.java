@@ -37,11 +37,11 @@ public class CdrAggregationEngineTestSpec {
         AggregationRecord aggregationRecord1 = cdrAggregationEngine.get(cdrRec1);
 
         System.out.println(aggregationRecord1.toString());
-        assertTrue(aggregationRecord1.toString().equals("AggregationRecord(seqNum: 10, duration: 30)"));
+        assertTrue(aggregationRecord1.toString().equals("AggregationRecord(seqNum: 10, causeForOutput: 2, duration: 30)"));
 
         AggregationRecord aggregationRecord2 = cdrAggregationEngine.get(cdrRec2);
 
         System.out.println(aggregationRecord2.toString());
-        assertTrue(aggregationRecord2.toString().equals("AggregationRecord(seqNum: 10, duration: 10)"));
+        assertTrue(aggregationRecord2.toString().equals("AggregationRecord(seqNum: 10, causeForOutput: 2, duration: 10)"));
     }
 }

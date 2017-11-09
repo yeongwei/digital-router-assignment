@@ -14,7 +14,7 @@ public class Application {
 
     public static void main(String[] args) throws Exception {
         //Create an CallRecordsProcessor an feed it with an anonymous class, to debug its activity
-        CallRecordsProcessor processor = new MyCallRecordsProcessor(new BillingGateway() {
+        CallRecordsProcessor processor = new MyTextInputCallRecordsProcessor(new BillingGateway() {
             @Override
             public void beginBatch() {
             }
