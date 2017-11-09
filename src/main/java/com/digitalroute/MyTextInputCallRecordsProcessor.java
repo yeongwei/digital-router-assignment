@@ -41,8 +41,12 @@ final public class MyTextInputCallRecordsProcessor extends TextInputCallRecordsP
                 } else if (cdrRecord.endCall()) {
                     cdrAggregationEngine.put(cdrRecord);
                     AggregationRecord aggregationRecord = cdrAggregationEngine.get(cdrRecord);
-                    billingGateway().consume(cdrRecord.callId(), aggregationRecord.valueOf("seqNum").valueInt(),
-                            cdrRecord.aNum(), cdrRecord.bNum(), aggregationRecord.valueOf("causeForOutput").valueByte(),
+                    billingGateway().consume(
+                            cdrRecord.callId(),
+                            aggregationRecord.valueOf("seqNum").valueInt(),
+                            cdrRecord.aNum(),
+                            cdrRecord.bNum(),
+                            aggregationRecord.valueOf("causeForOutput").valueByte(),
                             aggregationRecord.valueOf("duration").valueInt());
                     cdrAggregationEngine.remove(cdrRecord);
                 } else if (cdrRecord.incompleteCall()) {
@@ -81,7 +85,7 @@ final public class MyTextInputCallRecordsProcessor extends TextInputCallRecordsP
     @Override
     protected void end() {
         AggregationSummary aggregationSummary = cdrAggregationEngine.summary();
-        billingGateway().endBatch(new Long((Integer) aggregationSummary.valueOf("duration")));
+        billingGateway().endBatch(new Long(aggregationSummary.valueOf("duration").valueInt()));
     }
 
     protected void logError(BillingGateway.ErrorCause errorCause, CdrRecord record) {

@@ -18,14 +18,14 @@ public class AggregationRecord {
 
     public boolean put(Record record) {
         for (int i = 0; i < aggregationFormulas.length; i++) {
-            final FieldDescriptor fd = aggregationFormulas[i].fieldDescriptor();
+            FieldDescriptor fd = aggregationFormulas[i].fieldDescriptor();
+            FieldValue fv = record.get(aggregationFormulas[i].fieldDescriptor().name());
             switch (aggregationFormulas[i].aggregationType()) {
                 case MAX:
-                    if (record.get(fd.name()).larger(state[i]))
-                        state[i] = record.get(fd.name()).value();
+                    if (fv.larger(state[i])) state[i] = fv.value();
                 break;
                 case SUM:
-                    state[i] = record.get(fd.name()).add(state[i]);
+                    state[i] = fv.add(state[i]);
                 break;
             }
         }
@@ -41,7 +41,7 @@ public class AggregationRecord {
 
     @Override
     public String toString() {
-        StringBuffer aggRecStr = new StringBuffer("AggregationRecord(");
+        StringBuffer aggRecStr = new StringBuffer(getClass().getSimpleName() + "(");
         for (int i = 0; i < aggregationFormulas.length; i++) {
             aggRecStr.append(aggregationFormulas[i].fieldDescriptor().name() + ": " + state[i]);
             if (i + 1 == aggregationFormulas.length) aggRecStr.append(")");

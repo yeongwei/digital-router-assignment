@@ -24,7 +24,7 @@ public class AggregationTestSpec {
         HashMap<AggregationKey, String> m = new HashMap<AggregationKey, String>();
         m.put(aggKey1, "A");
         assertTrue(m.containsKey(aggKey1));
-        assertTrue(aggKey2.valueOf("counter").equals("ABC"));
+        assertTrue(aggKey2.valueOf("counter").value().equals("ABC"));
     }
 
     @Test

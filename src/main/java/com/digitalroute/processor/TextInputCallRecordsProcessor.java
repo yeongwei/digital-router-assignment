@@ -18,6 +18,10 @@ public abstract class TextInputCallRecordsProcessor implements CallRecordsProces
         this.textInputSchema = textInputSchema;
     }
 
+    protected BillingGateway billingGateway() {
+        return billingGateway;
+    }
+
     /**
      * Should be used to process CDR(Call Data Records) batches from an {@link InputStream}.
      * Look at {@link Application#main(String[])} for an example
@@ -34,12 +38,26 @@ public abstract class TextInputCallRecordsProcessor implements CallRecordsProces
         end();
     }
 
-    protected BillingGateway billingGateway() {
-        return billingGateway;
-    }
+    /* Life cycle starts below */
 
+    /**
+     * The first method to be called
+     */
     protected abstract void begin();
+
+    /**
+     * Handles each read record
+     * @param record
+     */
     protected abstract void process(Record record);
+
+    /**
+     * Handles after finish reading all records
+     */
     protected abstract void postProcess();
+
+    /**
+     * The last method after processing input
+     */
     protected abstract void end();
 }

@@ -39,18 +39,14 @@ public abstract class Record {
      * @param index starts from 0
      * @return
      */
-    public FieldValue get(int index) {
-        return fieldValues[index];
-    }
+    public FieldValue get(int index) { return fieldValues[index]; }
 
     /**
      * Get record value with name
      * @param name
      * @return
      */
-    public FieldValue get(String name) {
-        return get(recordSchema.indexOf(name));
-    }
+    public FieldValue get(String name) { return get(recordSchema.indexOf(name)); }
 
     @Override
     public String toString() {
