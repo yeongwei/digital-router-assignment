@@ -73,7 +73,7 @@ final public class MyTextInputCallRecordsProcessor extends TextInputCallRecordsP
         for (AggregationKey aggregationKey : aggregations.keySet()) {
             AggregationRecord aggregationRecord = aggregations.get(aggregationKey);
             billingGateway().consume(
-                    aggregationKey.valueOf("callId").toString(),
+                    aggregationKey.valueOf("callId").valueString(),
                     aggregationRecord.valueOf("seqNum").valueInt(),
                     aggregationKey.valueOf("aNum").valueString(),
                     aggregationKey.valueOf("bNum").valueString(),
