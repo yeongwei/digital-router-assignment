@@ -1,5 +1,5 @@
 package com.digitalroute.common.record.aggregation;
 
 public enum AggregationType {
-    MAX, SUM
+    MAX, SUM, LAST
 }

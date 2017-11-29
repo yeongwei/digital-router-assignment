@@ -14,7 +14,7 @@ final public class CdrAggregationSpec extends AggregationSpec {
     public CdrAggregationSpec() {
         super(new FieldDescriptor[]{ callId, aNum, bNum}, new AggregationFormula[] {
                 new AggregationFormula(seqNum, MAX),
-                new AggregationFormula(causeForOutput, MAX),
+                new AggregationFormula(causeForOutput, LAST),
                 new AggregationFormula(duration, SUM)
         });
     }

@@ -27,6 +27,9 @@ public class AggregationRecord {
                 case SUM:
                     state[i] = fv.add(state[i]);
                 break;
+                case LAST:
+                    state[i] = fv.value();
+                break;
             }
         }
         return true;

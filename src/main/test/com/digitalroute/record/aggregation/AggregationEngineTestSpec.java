@@ -20,19 +20,20 @@ public class AggregationEngineTestSpec {
         SampleAggregationEngine engine = new SampleAggregationEngine();
 
         CdrRecord cdrRec = new CdrRecord();
-        cdrRec.set(0, "A");
-        cdrRec.set(1, 10);
-        cdrRec.set(2, "11");
-        cdrRec.set(3, "22");
-        cdrRec.set(4, (byte) 2);
-        cdrRec.set(5, 10);
+        cdrRec.set("callId", "A");
+        cdrRec.set("seqNum", 10);
+        cdrRec.set("aNum", "11");
+        cdrRec.set("bNum", "22");
+        cdrRec.set("causeForOutput", (byte) 2);
+        cdrRec.set("duration", 10);
 
         engine.put(cdrRec);
         engine.put(cdrRec);
+        cdrRec.set("causeForOutput", (byte) 1);
         engine.put(cdrRec);
 
         AggregationRecord aggregationRecord = engine.get(cdrRec);
         System.out.println(aggregationRecord.toString());
-        assertTrue(aggregationRecord.toString().equals("AggregationRecord(seqNum: 10, causeForOutput: 2, duration: 30)"));
+        assertTrue(aggregationRecord.toString().equals("AggregationRecord(seqNum: 10, causeForOutput: 1, duration: 30)"));
     }
 }
